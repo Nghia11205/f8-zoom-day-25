@@ -22,6 +22,7 @@ tabItems.onclick = function (e) {
         tabContent.forEach((tab) => {
             if (tab.id === target) tab.classList.add("active");
         });
+        checkIndex = item.dataset.index;
     }
 };
 // Dùng phím để
