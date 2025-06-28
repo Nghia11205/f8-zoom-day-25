@@ -35,19 +35,19 @@ const dots = document.querySelectorAll(".dot");
 slideshowInner.ontransitionend = function () {
     const slides = document.querySelectorAll(".slide");
     if (slides[currentIndex].classList.contains("isClone")) {
+        slideshowInner.style.transition = "none";
         if (currentIndex === slides.length - 1) {
             currentIndex = 1;
         } else if (currentIndex === 0) {
-            currentIndex = slides.length - 1;
+            currentIndex = slides.length - 2;
         }
-        updatePosition(true);
+        requestAnimationFrame(() => updatePosition(true));
     }
-    dots.forEach((dot) => {
-        dot.classList.remove("active");
-    });
-    if (currentIndex > 0 && currentIndex <= dots.length) {
-        dots[currentIndex - 1].classList.toggle("active");
-    }
+
+    const dotIndex = (currentIndex - 1 + dots.length) % dots.length;
+    dots.forEach((dot) => dot.classList.remove("active"));
+    dots[dotIndex].classList.add("active");
+
     isAnimating = false;
 };
 
