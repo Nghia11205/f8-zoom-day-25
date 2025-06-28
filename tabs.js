@@ -24,19 +24,28 @@ tabItems.onclick = function (e) {
         });
     }
 };
-
 // Dùng phím để
+let checkIndex;
 document.body.addEventListener("keydown", (e) => {
+    let checkKey = false;
     removeActive();
     tabItem.forEach((tab) => {
         if (tab.dataset.index === e.key) {
             tab.classList.add("active");
             localStorage.setItem("activeTab", tab.dataset.tab);
+            checkKey = true;
+            checkIndex = tab.dataset.index;
         }
     });
     tabContent.forEach((tab) => {
-        if (tab.dataset.index === e.key) tab.classList.add("active");
+        if (tab.dataset.index === e.key) {
+            tab.classList.add("active");
+        }
     });
+    if (!checkKey) {
+        tabItem[checkIndex - 1].classList.add("active");
+        tabContent[checkIndex - 1].classList.add("active");
+    }
 });
 
 window.addEventListener("DOMContentLoaded", () => {
