@@ -15,15 +15,13 @@ function removeActive() {
 tabItems.onclick = function (e) {
     const item = e.target.closest(".tab-item");
     if (item) {
-        item.onclick = function (e) {
-            removeActive();
-            item.classList.add("active");
-            localStorage.setItem("activeTab", item.dataset.tab);
-            const target = item.dataset.tab;
-            tabContent.forEach((tab) => {
-                if (tab.id === target) tab.classList.add("active");
-            });
-        };
+        removeActive();
+        item.classList.add("active");
+        localStorage.setItem("activeTab", item.dataset.tab);
+        const target = item.dataset.tab;
+        tabContent.forEach((tab) => {
+            if (tab.id === target) tab.classList.add("active");
+        });
     }
 };
 
